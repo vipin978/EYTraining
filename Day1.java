@@ -27,6 +27,9 @@ class DefaultValues{ // printing default values
 	private float fl;
 	private boolean bool;
 	private byte b;
+	private float f = (float)integer;
+	private byte by = (byte)character;
+	private int in = (int) fl;
 	
 	public void printingDefaultValues() {
 		System.out.println("INT:"+integer);
@@ -34,6 +37,9 @@ class DefaultValues{ // printing default values
 		System.out.println("FLOAT:"+fl);
 		System.out.println("BOOLEAN:"+bool);
 		System.out.println("BYTE"+b);
+		System.out.println("type converted: integer"+f);
+		System.out.println("type converted: char"+by);
+		System.out.println("type converted: float"+fl);
 	}
 	
 }
