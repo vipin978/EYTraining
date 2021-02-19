@@ -178,7 +178,7 @@ class MatrixDisplay{
 
 //12
 
-class CmdAccess{ // accessing command line arguments
+class CmdAccess{ // accessing command line arguments and this should be in another class file
 	public static void main(String[] args) {
 		for(int i=0;i<args.length;i++) {
 			System.out.println(args[i]);
