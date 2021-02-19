@@ -74,9 +74,8 @@ class AverageOfN{ // finding the average of N numbers
 		int avg = 0;
 		for(int i:n) {
 			avg += i;
-			avg = avg / 2;
 		}
-		return avg;
+		return avg/n.length;
 	}
 }
 
@@ -212,15 +211,14 @@ class ScoreBoard{ // Calculating scores of students in a matrix
 		}
 	}
 	
-	public int[] result() {
-		int[] resultArr = new int[this.noOfStudents];
+	public float[] result() {
+		float[] resultArr = new float[this.noOfStudents];
 		for(int i = 0;i<this.noOfStudents;i++) {
-			int avgResult = 0;
+			float avgResult = 0;
 			for(int j =0;j<this.marks;j++) {
 				avgResult += this.matrix[i][j];
-				avgResult = avgResult/ 2;
 			}
-			resultArr[i] = avgResult;
+			resultArr[i] = avgResult/this.marks;
 		}
 		return resultArr;
 	}
