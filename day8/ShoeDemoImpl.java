@@ -11,7 +11,8 @@ public class ShoeDemoImpl {
 class Container{
 	public static ShoeShop getShoeShop() {
 		ShoeFactory sf = new BataShoeFactory();
-		ShoeShop ss = new GokulShoeShop(sf);
+		ShoeShop ss = new GokulShoeShop();
+		ss.setSf(sf);
 		return ss;
 	}
 }
