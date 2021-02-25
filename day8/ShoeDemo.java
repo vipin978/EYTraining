@@ -36,11 +36,19 @@ abstract class ShoeShop implements ShoeSeller{
 		this.sf = sf; 
 	}
 	class LeatherShoe extends Shoe{
-		
+		public String owner;
+		public LeatherShoe(String name) {
+			this.owner = name;
+			System.out.println("Leather Shoe sold to "+owner);
+		}
 	}
 
 	class SportShoe extends Shoe{
-		
+		public String owner;
+		public SportShoe(String name) {
+			this.owner = name;
+			System.out.println("Sports Shoe sold to "+owner);
+		}
 	}
 }
 
@@ -49,12 +57,13 @@ abstract class Shoe{
 }
 
 abstract class Customer{
-	ShoeShop s;
+	public ShoeShop s;
+	public String name;
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
-	public Customer(ShoeShop s) {
-		this.s = s;
+	public Customer(String name) {
+		this.name = name;
 	}
 }
 
@@ -82,20 +91,24 @@ class GokulShoeShop extends ShoeShop{
 	@Override
 	public Shoe sellShoe(Customer c) {
 		// TODO Auto-generated method stub
-		return new LeatherShoe();
+		return new LeatherShoe(c.name);
 	}
 }
 
 
 class ShoeCustomer extends Customer{
-	public ShoeCustomer(ShoeShop sf) {
-		super(sf);
-	}
+	
 	public ShoeCustomer(String s) {
+		super(s);
+	}
+	public ShoeCustomer() {
 		super();
-		System.out.println("Shoe sold from"+this.sf);
 	}
 }
+
+
+
+
 
 
 
