@@ -1,0 +1,15 @@
+<!ELEMENT CustomerDetails (Bacis,Invoice)>
+<!ELEMENT Bacis (CustomerName,BillNo,BillDate)>
+<!ELEMENT Invoice (ItemInfo+)>
+<!ELEMENT CustomerName (#PCDATA)>
+<!ELEMENT BillNo (#PCDATA)>
+<!ELEMENT BillDate (#PCDATA)>
+<!ELEMENT ItemInfo (S.NO,Item,Unit,Price,qty)>
+<!ELEMENT  S.NO (#PCDATA)>
+<!ELEMENT Item (#PCDATA)>
+<!ELEMENT Unit (#PCDATA)>
+<!ELEMENT Price (#PCDATA)>
+<!ELEMENT qty (#PCDATA)>
+
+
+

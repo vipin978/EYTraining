@@ -1,0 +1,14 @@
+<!DOCTYPE books SYSTEM "first1.dtd">
+
+<books>
+	<book>
+		<id>101</id>
+		<name>me</name>
+		<author>who</author>
+	</book>
+	<book>
+		<id>100</id>
+		<name>xml</name>
+		<author>jason</author>
+	</book>
+</books>

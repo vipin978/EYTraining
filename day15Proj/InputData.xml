@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE CustomerDetails SYSTEM "InputData.dtd">
+
+<CustomerDetails>
+	<Bacis>
+		<CustomerName> Vipin </CustomerName>
+		<BillNo> 1 </BillNo>
+		<BillDate> 10/5/2021 </BillDate>
+	</Bacis>
+	<Invoice>
+		<ItemInfo>
+			<S.NO> 1 </S.NO>
+			<Item> Milk </Item>
+			<Unit> 6 </Unit>
+			<Price> 120 </Price>
+			<qty> 4 </qty>
+		</ItemInfo>
+		<ItemInfo>
+			<S.NO> 2 </S.NO>
+			<Item> Biscuit </Item>
+			<Unit> 6 </Unit>
+			<Price> 170 </Price>
+			<qty> 4 </qty>
+		</ItemInfo>
+		<ItemInfo>
+			<S.NO> 1 </S.NO>
+			<Item> Chocolate </Item>
+			<Unit> 6 </Unit>
+			<Price> 160 </Price>
+			<qty> 4 </qty>
+		</ItemInfo>	
+	</Invoice>
+	
+</CustomerDetails>
+
+
+
+
+
+
+
+
+
+
