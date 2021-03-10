@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 
 public class LoadXml{
 	public static void main(String[] args) throws Exception{
-		PersonLoader p = LoadXml1.setValues().load();
+	CustomerData p = LoadXml1.setValues().load();
 		p.viewData();
 	}
 }
@@ -27,7 +27,7 @@ class LoadXml1 {
 	static DocumentBuilder db;
 	static Document doc;
 	
-	PersonLoader pl = new PersonLoader();
+	CustomerData pl = new CustomerData();
 	
 	public static LoadXml1 setValues() throws Exception {
 		dbf.setIgnoringElementContentWhitespace(true);
@@ -64,29 +64,29 @@ class LoadXml1 {
 		}
 	}
 	
-	public PersonLoader load() throws Exception{
+	public CustomerData load() throws Exception{
 		this.loadCustomerDetails();
 		this.loadInvoiceDetails();
 		return pl;
 	}
 }
 
-abstract class DetailsLoader{
+interface DetailsLoader{
 	public abstract DetailsLoader addItem(List<String> v);
 }
 
 
-class PersonLoader extends DetailsLoader{
+class CustomerData implements DetailsLoader{
 	public String name;
 	public String BillNo;
 	public String date;
 	List<List<String>> items = new ArrayList<List<String>>();
 
-	public PersonLoader() {
+	public CustomerData() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public PersonLoader(String name,String BillNo,String date) {
+	public CustomerData(String name,String BillNo,String date) {
 		this.name = name;
 		this.BillNo = BillNo;
 		this.date = date;

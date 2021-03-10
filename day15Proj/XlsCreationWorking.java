@@ -16,7 +16,8 @@ public class XlsCreationWorking {
 //
 //		xl.creatRowHead(Arrays.asList("Sno","Name","age"));
 //		xl.creatRow(Arrays.asList("1","Vipin","14"));
-		PersonLoader p = LoadXml1.setValues().load();
+		CustomerData p = LoadXml1.setValues().load();
+		System.out.println(p.items.get(0).size());
 		xl.insertCustomerDetails(p);
 		xl.insertRowHead(Arrays.asList("S.NO","Item","Unit","Price","qty"));
 		xl.insertRows(p.items);
@@ -41,7 +42,7 @@ class Xls{
 		this.fixedRowLength = 0;
 	}
 	
-	public void insertCustomerDetails(PersonLoader p) {
+	public void insertCustomerDetails(CustomerData p) {
 		HSSFRow rowhead = sheet.createRow((short)countRow);
 		rowhead.createCell(0).setCellValue("  ");
 		rowhead.createCell(1).setCellValue(p.name);
