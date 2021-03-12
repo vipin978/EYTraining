@@ -27,7 +27,6 @@ class Task implements Callable<Integer>{
 	public String searchElement;
 	
 	public Task() {
-		
 	}
 	public Task(int startPos, int endPos, String[] arr, String searchElement) {
 		super();
@@ -35,9 +34,11 @@ class Task implements Callable<Integer>{
 		this.endPos = endPos;
 		this.arr = arr;
 		this.searchElement = searchElement;
+		System.out.println("Called " + startPos);
 	}
 	@Override
 	public Integer call() throws Exception {
+		
 		int count = 0;
 		for(int i =startPos;i<=endPos;i++) {
 			if(arr[i].equals(searchElement)) {

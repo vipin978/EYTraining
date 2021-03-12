@@ -12,16 +12,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class LoadXml{
-	public static void main(String[] args) throws Exception{
-	CustomerData p = LoadXml1.setValues().load();
-		p.viewData();
-	}
-}
+//public class LoadXml{
+//	public static void main(String[] args) throws Exception{
+//	CustomerData p = LoadXml1.setValues().load();
+//		p.viewData();
+//	}
+//}
 
 
 
-class LoadXml1 {
+public class LoadXml {
 	
 	static DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
 	static DocumentBuilder db;
@@ -29,12 +29,12 @@ class LoadXml1 {
 	
 	CustomerData pl = new CustomerData();
 	
-	public static LoadXml1 setValues() throws Exception {
+	public static LoadXml setValues() throws Exception {
 		dbf.setIgnoringElementContentWhitespace(true);
 		dbf.setValidating(true);
 		db = dbf.newDocumentBuilder();
 		doc = db.parse("src/day15Proj/inputData.xml");
-		return new LoadXml1();
+		return new LoadXml();
 	}
 	
 	public void loadCustomerDetails() {
@@ -70,46 +70,3 @@ class LoadXml1 {
 		return pl;
 	}
 }
-
-interface DetailsLoader{
-	public abstract DetailsLoader addItem(List<String> v);
-}
-
-
-class CustomerData implements DetailsLoader{
-	public String name;
-	public String BillNo;
-	public String date;
-	List<List<String>> items = new ArrayList<List<String>>();
-
-	public CustomerData() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public CustomerData(String name,String BillNo,String date) {
-		this.name = name;
-		this.BillNo = BillNo;
-		this.date = date;
-	}
-	
-	@Override
-	public DetailsLoader addItem(List<String> v) {
-		// TODO Auto-generated method stub
-		items.add(v);
-		return this;
-	}
-	
-	public void viewData() {
-		for(List<String> l:items) {
-			System.out.println(l);
-		}
-	}
-}
-
-
-
-//class Container{
-//	public static PersonLoader getPLObj() {
-//		
-//	}
-//}

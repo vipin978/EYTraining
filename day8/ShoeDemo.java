@@ -1,4 +1,5 @@
 package day8;
+import java.lang.reflect.Field;
 
 public class ShoeDemo {
 	
@@ -10,63 +11,96 @@ interface ManuFacturer{
 }
 
 interface ShoeManufacturer extends ManuFacturer{
-	public Shoe makeShoe();
+	public Shoe makeShoe(String s) throws Exception;
 }
 
 abstract class ShoeFactory implements ShoeManufacturer{
-	public boolean leatherShoe;
-	public boolean sportShoe;
-	public boolean slippers;
+	public boolean LeatherShoe;
+	public boolean SportShoe;
+	public boolean Slippers;
 	public ShoeFactory(ShoeFactoryBuilder builder) {
-		
+		this.LeatherShoe = builder.isLeatherShoe();
+		this.SportShoe = builder.isSportShoe();
+		this.Slippers = builder.isSlippers();
 	}
 }
 
 class ShoeFactoryBuilder{
 	
-	private boolean leatherShoe;
-	private boolean sportShoe;
-	private boolean slippers;
+	private boolean LeatherShoe;
+	private boolean SportShoe;
+	private boolean Slippers;
 	
 	public boolean isLeatherShoe() {
-		return leatherShoe;
+		return LeatherShoe;
 	}
 	public ShoeFactoryBuilder setLeatherShoe(boolean leatherShoe) {
-		this.leatherShoe = leatherShoe;
+		this.LeatherShoe = leatherShoe;
 		return this;
 	}
 	public boolean isSportShoe() {
-		return sportShoe;
+		return SportShoe;
 	}
 	public ShoeFactoryBuilder setSportShoe(boolean sportShoe) {
-		this.sportShoe = sportShoe;
+		this.SportShoe = sportShoe;
 		return this;
 	}
 	public boolean isSlippers() {
-		return slippers;
+		return Slippers;
 	}
 	public ShoeFactoryBuilder setSlippers(boolean slippers) {
-		this.slippers = slippers;
+		this.Slippers = slippers;
 		return this;
 	}
 	public ShoeFactory build(String name) throws Exception{
-		return (ShoeFactory)Class.forName(name).newInstance();
+		return (ShoeFactory)Class.forName(name).getConstructor(new Class[] {ShoeFactoryBuilder.class}).newInstance(this);
 	}
 }
 
 class BataShoeFactory extends ShoeFactory{
+	
+	public BataShoeFactory(ShoeFactoryBuilder sfb) {
+		super(sfb);
+	}
 	@Override
-	public Shoe makeShoe() {
-		// TODO Auto-generated method stub
-		return new LeatherShoe("Bata");
+	public Shoe makeShoe(String shoeType) throws Exception {
+		Class c=this.getClass();
+		try {
+			Field f=c.getField(shoeType);
+			if((boolean)f.get(this)) {
+				return (Shoe)Class.forName("day8."+shoeType).getConstructor(new Class[] {String.class}).newInstance("Lakhain");
+			}
+			else {
+				return new NoShoe("Lakhin");
+			}
+			}
+			catch(Exception e){
+				return new NoShoe("Lakhin");
+			}
 	}
 }
 
 class LakhainShoeFactory extends ShoeFactory{
+	
+	public LakhainShoeFactory(ShoeFactoryBuilder sfb) {
+		super(sfb);
+	}
 	@Override
-	public Shoe makeShoe() {
-		// TODO Auto-generated method stub
-		return new SportShoe("Lakhain");
+	public Shoe makeShoe(String shoeType) throws Exception {
+		Class c=this.getClass();
+		try {
+		Field f=c.getField(shoeType);
+		if((boolean)f.get(this)) {
+			return (Shoe)Class.forName("day8."+shoeType).getConstructor(new Class[] {String.class}).newInstance("Lakhain");
+		}
+		else {
+			return new NoShoe("Lakhin");
+		}
+		}
+		catch(Exception e){
+			return new NoShoe("Lakhin");
+		}
+		// TODO Auto-generated method stub	
 	}
 }
 
@@ -76,7 +110,7 @@ interface Seller{
 }
 
 interface ShoeSeller extends Seller{
-	public Shoe sellShoe(Customer c);
+	public Shoe sellShoe(Customer c,String shoeType) throws Exception;
 }
 
 abstract class ShoeShop implements ShoeSeller{
@@ -85,37 +119,19 @@ abstract class ShoeShop implements ShoeSeller{
 	public ShoeFactory getSf() {
 		return sf;
 	}
-<<<<<<< HEAD
 
 	public void setSf(ShoeFactory sf) {
 		this.sf = sf;
-=======
-	class LeatherShoe extends Shoe{
-		public String owner;
-		public LeatherShoe(String name) {
-			this.owner = name;
-			System.out.println("Leather Shoe sold to "+owner);
-		}
->>>>>>> ff5051ed76e5c378fd65f2abde11b9f3ea9ede96
 	}
 	
 	
 }
 
-<<<<<<< HEAD
 class GokulShoeShop extends ShoeShop{
 	@Override
-	public Shoe sellShoe(Customer c) {
+	public Shoe sellShoe(Customer c,String shoeType) throws Exception{
 		// TODO Auto-generated method stub
-		return getSf().makeShoe();
-=======
-	class SportShoe extends Shoe{
-		public String owner;
-		public SportShoe(String name) {
-			this.owner = name;
-			System.out.println("Sports Shoe sold to "+owner);
-		}
->>>>>>> ff5051ed76e5c378fd65f2abde11b9f3ea9ede96
+		return getSf().makeShoe(shoeType);
 	}
 }
 
@@ -124,26 +140,15 @@ class GokulShoeShop extends ShoeShop{
 abstract class Shoe{
 	public String factoryName;
 
-<<<<<<< HEAD
 	public Shoe(String name) {
 		this.factoryName = name;
-=======
-abstract class Customer{
-	public ShoeShop s;
-	public String name;
-	public Customer() {
-		// TODO Auto-generated constructor stub
-	}
-	public Customer(String name) {
-		this.name = name;
->>>>>>> ff5051ed76e5c378fd65f2abde11b9f3ea9ede96
 	}
 }
 
 class LeatherShoe extends Shoe{
 	public LeatherShoe(String name) {
 		super(name);
-		System.out.println("Sports Shoe made by "+this.factoryName);
+		System.out.println("Leather Shoe made by "+this.factoryName);
 	}
 }
 
@@ -155,23 +160,20 @@ class SportShoe extends Shoe{
 	}
 }
 
+class NoShoe extends Shoe{
+	public NoShoe(String name) {
+		super(name);
+		System.out.println(this.factoryName + "Does not make this type of Shoe");
+		// TODO Auto-generated constructor stub
+	}
+}
+
 // ------------------------------------------------------------------------------------------------------
 
-<<<<<<< HEAD
 abstract class Customer{
 	public String name;
 	public Customer(String name) {
 		this.name = name;
-=======
-class GokulShoeShop extends ShoeShop{
-	public GokulShoeShop(ShoeFactory sf) {
-		super(sf);
-	}
-	@Override
-	public Shoe sellShoe(Customer c) {
-		// TODO Auto-generated method stub
-		return new LeatherShoe(c.name);
->>>>>>> ff5051ed76e5c378fd65f2abde11b9f3ea9ede96
 	}
 }
 
@@ -180,19 +182,9 @@ class ShoeCustomer extends Customer{
 	
 	public ShoeCustomer(String s) {
 		super(s);
-<<<<<<< HEAD
-=======
-	}
-	public ShoeCustomer() {
-		super();
->>>>>>> ff5051ed76e5c378fd65f2abde11b9f3ea9ede96
 	}
 	
 }
-
-
-
-
 
 
 
